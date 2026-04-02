@@ -1,1 +1,48 @@
 
+def factorial(x):
+    if (x!=0):
+        return x * factorial(x-1)
+    return 1
+
+def exp_x(x, n):
+    step= lambda i, k:(i ** k) / factorial(k)
+    result=0
+    for k in range(n+1):
+        result+=step(x,k)
+    return result
+
+
+a = 0
+def func(n):
+    global a
+    if n!=1:
+       a=(-1)**(n+1)/n
+       func(n-1)
+    a+=0.5
+
+n = int(input("Enter n: "))
+func(n)
+print(a)
+
+-------------------------------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+double series(int n) {
+    if (n == 1)
+        return 1.0;
+    if (n % 2 == 0)
+        return series(n - 1) - 1.0 / n;
+    else
+        return series(n - 1) + 1.0 / n;
+}
+
+int main() {
+    int n;
+    cout << "Enter n: ";
+    cin >> n;
+
+    double result = series(n);
+    cout << "S_" << n << " = " << result << endl;
+
+    return 0;
+}

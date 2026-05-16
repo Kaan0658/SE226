@@ -1,0 +1,53 @@
+int LED1pin=44;
+int LED2pin=45;
+int LED0pin=43;
+int LED3pin=46;
+void setup() {
+ pinMode(LED0pin, OUTPUT);
+ pinMode(LED1pin, OUTPUT);
+ pinMode(LED2pin, OUTPUT);
+ pinMode(LED3pin, OUTPUT);
+}
+void loop(){
+digitalWrite(LED0pin,HIGH);
+delay(1000);
+digitalWrite(LED0pin,LOW);
+delay(1000);
+digitalWrite(LED1pin,HIGH);
+delay(1000);
+digitalWrite(LED1pin,LOW);
+delay(1000);
+digitalWrite(LED2pin,HIGH);
+delay(1000);
+digitalWrite(LED2pin,LOW);
+delay(1000);
+digitalWrite(LED3pin,HIGH);
+delay(1000);
+digitalWrite(LED3pin,LOW);
+delay(1000);
+}
+
+
+byte lastButtonState[]= {LOW,LOW,LOW,LOW};
+byte ledState[]= {LOW,LOW,LOW,LOW};
+int ledPins []= {43,44,45,46};
+int buttonPins []= {38,39,40,41};
+void setup() {
+  for(int i=0; i<4;i++){
+    pinMode(ledPins[i], OUTPUT);
+    pinMode(buttonPins[i], INPUT);
+  }
+} 
+void loop(){
+  for(int i=0; i<4;i++){
+    byte buttonState= digitalRead(buttonPins[i]);
+    if(buttonState != lastButtonState[i]){
+        lastButtonState[i]=buttonState;
+        if(buttonState==LOW){
+          ledState[i]=(ledState[i] == HIGH) ? LOW:HIGH;
+          digitalWrite(ledPins[i], ledState[i]);
+          delay(500);
+        }
+    }
+  }
+}

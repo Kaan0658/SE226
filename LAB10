@@ -1,0 +1,73 @@
+void incrementCounter() {
+    dig1++;
+
+    if (dig1 >= 10) {
+        dig1 = 0;
+        dig2++;
+    }
+
+    if (dig2 >= 10) {
+        dig2 = 0;
+        dig3++;
+    }
+
+    if (dig3 >= 10) {
+        dig3 = 0;
+        dig4++;
+    }
+
+    if (dig4 >= 10) {
+        dig4 = 0;
+    }
+}
+
+void displayCounter() {
+
+   digitalWrite(GND1,HIGH);
+   showDigit(dig1);
+   delay(4);
+   digitalWrite(GND1,LOW);
+
+   digitalWrite(GND2,HIGH);
+   showDigit(dig2);
+   delay(4);
+   digitalWrite(GND2,LOW);
+
+   digitalWrite(GND3,HIGH);
+   showDigit(dig3);
+   delay(4);
+   digitalWrite(GND3,LOW);
+
+   digitalWrite(GND4,HIGH);
+   showDigit(dig4);
+   delay(4);
+   digitalWrite(GND4,LOW);
+}
+
+void updateLCD() {
+
+   lcd.setCursor(0,0);
+
+   lcd.print("Counter: ");
+
+   lcd.print(dig4);
+   lcd.print(dig3);
+   lcd.print(dig2);
+   lcd.print(dig1);
+
+   lcd.print(" ");
+}
+
+void loop() {
+
+   displayCounter();
+
+   static unsigned long last=0;
+
+   if(millis()-last>=1000){
+      incrementCounter();
+      updateLCD();
+
+      last=millis();
+   }
+}
